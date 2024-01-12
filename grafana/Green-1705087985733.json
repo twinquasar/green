@@ -1,0 +1,6584 @@
+{
+  "__inputs": [
+    {
+      "name": "DS_PROMETHEUS",
+      "label": "prometheus",
+      "description": "",
+      "type": "datasource",
+      "pluginId": "prometheus",
+      "pluginName": "Prometheus"
+    },
+    {
+      "name": "DS_FILSCAN_API",
+      "label": "Filscan API",
+      "description": "",
+      "type": "datasource",
+      "pluginId": "marcusolsson-json-datasource",
+      "pluginName": "JSON API"
+    },
+    {
+      "name": "DS_EXPRESSION",
+      "label": "Expression",
+      "description": "",
+      "type": "datasource",
+      "pluginId": "__expr__"
+    }
+  ],
+  "__elements": {},
+  "__requires": [
+    {
+      "type": "datasource",
+      "id": "__expr__",
+      "version": "1.0.0"
+    },
+    {
+      "type": "panel",
+      "id": "bargauge",
+      "name": "Bar gauge",
+      "version": ""
+    },
+    {
+      "type": "grafana",
+      "id": "grafana",
+      "name": "Grafana",
+      "version": "10.2.3"
+    },
+    {
+      "type": "panel",
+      "id": "graph",
+      "name": "Graph (old)",
+      "version": ""
+    },
+    {
+      "type": "datasource",
+      "id": "marcusolsson-json-datasource",
+      "name": "JSON API",
+      "version": "1.3.9"
+    },
+    {
+      "type": "datasource",
+      "id": "prometheus",
+      "name": "Prometheus",
+      "version": "1.0.0"
+    },
+    {
+      "type": "panel",
+      "id": "stat",
+      "name": "Stat",
+      "version": ""
+    },
+    {
+      "type": "panel",
+      "id": "table",
+      "name": "Table",
+      "version": ""
+    },
+    {
+      "type": "panel",
+      "id": "timeseries",
+      "name": "Time series",
+      "version": ""
+    }
+  ],
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "datasource",
+          "uid": "grafana"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "description": "A Filecoin lotus dashboard for miners",
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": null,
+  "links": [
+    {
+      "asDropdown": false,
+      "icon": "external link",
+      "includeVars": false,
+      "keepTime": false,
+      "tags": [],
+      "targetBlank": true,
+      "title": "CID gravity",
+      "tooltip": "",
+      "type": "link",
+      "url": "https://app.cidgravity.com/$miner_id"
+    },
+    {
+      "icon": "info",
+      "tags": [],
+      "targetBlank": true,
+      "title": "Estuary",
+      "tooltip": "",
+      "type": "link",
+      "url": "https://estuary.tech/providers/stats/$miner_id"
+    },
+    {
+      "asDropdown": false,
+      "icon": "external link",
+      "includeVars": false,
+      "keepTime": false,
+      "tags": [],
+      "targetBlank": true,
+      "title": "Filscan",
+      "tooltip": "View miner $miner_id on Filscan",
+      "type": "link",
+      "url": "https://filscan.io/miner/$miner_id"
+    },
+    {
+      "icon": "dashboard",
+      "includeVars": false,
+      "tags": [],
+      "targetBlank": true,
+      "title": "Filfox Miner",
+      "tooltip": "",
+      "type": "link",
+      "url": "https://filfox.info/en/address/$miner_id"
+    },
+    {
+      "icon": "external link",
+      "tags": [],
+      "targetBlank": true,
+      "title": "Filscout",
+      "tooltip": "",
+      "type": "link",
+      "url": "https://filscout.io/en/pc/miner?id=$miner_id"
+    },
+    {
+      "icon": "info",
+      "includeVars": true,
+      "keepTime": true,
+      "tags": [],
+      "targetBlank": true,
+      "title": "lotus Farcaster Homepage",
+      "tooltip": "Open Lotus Farcaster homepage on GitHub",
+      "type": "link",
+      "url": "https://github.com/s0nik42/lotus-farcaster"
+    }
+  ],
+  "liveNow": false,
+  "panels": [
+    {
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 1159,
+      "panels": [],
+      "repeat": "location_name",
+      "repeatDirection": "h",
+      "title": "Datacenter - $localtion_name",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "normal"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "voltamp"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Grid consumption"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "red",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 14,
+        "x": 0,
+        "y": 1
+      },
+      "id": 1072,
+      "options": {
+        "legend": {
+          "calcs": [
+            "last",
+            "mean",
+            "max"
+          ],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "expr": "green_rack_power_consumption_va{location_name=\"$location_name\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "Grid consumption",
+          "range": true,
+          "refId": "C"
+        }
+      ],
+      "title": "Site consumption - $location_name",
+      "transformations": [],
+      "type": "timeseries"
+    },
+    {
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 7
+      },
+      "id": 1158,
+      "panels": [],
+      "repeat": "client_name",
+      "repeatDirection": "h",
+      "title": "Client - $client_name",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "normal"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "voltamp"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Grid consumption"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "red",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 14,
+        "x": 0,
+        "y": 8
+      },
+      "id": 1201,
+      "options": {
+        "legend": {
+          "calcs": [
+            "last",
+            "mean",
+            "max"
+          ],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "expr": "sum(green_rack_power_consumption_va{client_name=\"$client_name\"}) by (rack_id)",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "Rack-{{rack_id}}",
+          "range": true,
+          "refId": "C"
+        }
+      ],
+      "title": "Rack consumption - $client_name",
+      "transformations": [],
+      "type": "timeseries"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 14
+      },
+      "id": 1093,
+      "panels": [],
+      "repeat": "rack_id",
+      "repeatDirection": "h",
+      "title": "Racks  (Id=$rack_id)",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 85,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 0,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "normal"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "voltamp"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Total"
+            },
+            "properties": [
+              {
+                "id": "custom.stacking",
+                "value": {
+                  "group": "A",
+                  "mode": "none"
+                }
+              },
+              {
+                "id": "custom.fillOpacity",
+                "value": 0
+              },
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "transparent",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "false"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Not Filecoin"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "true"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Filecoin equipment"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "false"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#7b7b7b",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "true"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-blue",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Not Filecoin"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "yellow",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Shared equipment"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "orange",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Filecoin equipment"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "blue",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 14,
+        "x": 0,
+        "y": 15
+      },
+      "id": 1180,
+      "options": {
+        "legend": {
+          "calcs": [
+            "last",
+            "mean",
+            "max"
+          ],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "expr": "green_rack_power_consumption_va - on() sum(green_equipment_power_consumption_va)",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "Shared equipment",
+          "range": true,
+          "refId": "C"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "disableTextWrap": false,
+          "editorMode": "code",
+          "expr": "sum(green_equipment_power_consumption_va) by (in_scope)",
+          "fullMetaSearch": false,
+          "hide": false,
+          "includeNullMetadata": true,
+          "instant": false,
+          "legendFormat": "{{in_scope}}",
+          "range": true,
+          "refId": "B",
+          "useBackend": false
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "disableTextWrap": false,
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "green_rack_power_consumption_va",
+          "fullMetaSearch": false,
+          "includeNullMetadata": true,
+          "instant": false,
+          "legendFormat": "Total",
+          "range": true,
+          "refId": "A",
+          "useBackend": false
+        }
+      ],
+      "title": "Rack consumption",
+      "transformations": [],
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "fixed"
+          },
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "voltamp"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Equipment"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 93
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Power consumption"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 159
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Is Filecoin Equipment ?"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 175
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 16,
+        "w": 9,
+        "x": 14,
+        "y": 15
+      },
+      "id": 1114,
+      "interval": "1m",
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": []
+      },
+      "pluginVersion": "10.2.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "disableTextWrap": false,
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "green_equipment_power_consumption_va{rack_id=\"$rack_id\"}",
+          "format": "table",
+          "fullMetaSearch": false,
+          "includeNullMetadata": true,
+          "instant": true,
+          "legendFormat": "{{equipment}}",
+          "range": false,
+          "refId": "A",
+          "useBackend": false
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "green_equipment_power_consumption_va{rack_id=\"$rack_id\"} * on() group_left () (green_rack_power_consumption_va{rack_id=\"$rack_id\"} / on() sum(green_equipment_power_consumption_va{rack_id=\"$rack_id\"}))",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "green_equipment_power_consumption_va * on() group_left () (green_rack_power_consumption_va / on() sum(green_equipment_power_consumption_va)) / on(equipment)  group_left()  (sum(green_sector_resource) by (equipment))",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "C"
+        }
+      ],
+      "title": "Equipment list",
+      "transformations": [
+        {
+          "id": "merge",
+          "options": {}
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Time": true,
+              "__name__": true,
+              "instance": true,
+              "rack_id": true
+            },
+            "includeByName": {},
+            "indexByName": {},
+            "renameByName": {
+              "Value #A": "Power consumption",
+              "Value #B": "Adjusted Power consumption",
+              "Value #C": "Per sector",
+              "equipment": "Equipment",
+              "in_scope": "Is Filecoin Equipment ?"
+            }
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "text",
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "voltamp"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 14,
+        "x": 0,
+        "y": 21
+      },
+      "id": 1115,
+      "interval": "1m",
+      "options": {
+        "legend": {
+          "calcs": [
+            "lastNotNull",
+            "mean",
+            "max"
+          ],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "10.2.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "disableTextWrap": false,
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "green_equipment_power_consumption_va{rack_id=\"$rack_id\"}",
+          "format": "time_series",
+          "fullMetaSearch": false,
+          "includeNullMetadata": true,
+          "instant": false,
+          "legendFormat": "{{equipment}}",
+          "range": true,
+          "refId": "A",
+          "useBackend": false
+        }
+      ],
+      "title": "Equipment consumption",
+      "transformations": [],
+      "type": "timeseries"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 31
+      },
+      "id": 1157,
+      "panels": [],
+      "repeat": "miner_id",
+      "repeatDirection": "h",
+      "title": "Miner - $miner_id",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "fixed"
+          },
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "voltamp"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "sector_id"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "none"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 16,
+        "w": 9,
+        "x": 0,
+        "y": 32
+      },
+      "id": 1136,
+      "interval": "1m",
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "frameIndex": 1,
+        "showHeader": true,
+        "sortBy": []
+      },
+      "pluginVersion": "10.2.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "disableTextWrap": false,
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "sort_desc(sum(green_sector_resource{miner_id=\"$miner_id\"} * on(equipment) group_left () (green_equipment_power_consumption_va * on() group_left () (green_rack_power_consumption_va / on() sum(green_equipment_power_consumption_va)) / on(equipment) (sum(green_sector_resource) by (equipment)))) by (sector_id))",
+          "format": "table",
+          "fullMetaSearch": false,
+          "includeNullMetadata": true,
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "A",
+          "useBackend": false
+        }
+      ],
+      "title": "Sector Consumption",
+      "transformations": [
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Time": true
+            },
+            "includeByName": {},
+            "indexByName": {},
+            "renameByName": {
+              "Time": "",
+              "Value": "Instant Consumption",
+              "sector_id": "Sector ID"
+            }
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 48
+      },
+      "id": 988,
+      "panels": [],
+      "title": "Chain (Filscan)",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "marcusolsson-json-datasource",
+        "uid": "${DS_FILSCAN_API}"
+      },
+      "description": "curl -X POST https://api-v2.filscan.io/api/v1/TotalIndicators --data '{}'|jq .",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "blue"
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 2,
+        "x": 0,
+        "y": 49
+      },
+      "id": 980,
+      "interval": "1m",
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "last"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "10.2.3",
+      "targets": [
+        {
+          "body": "{}",
+          "cacheDurationSeconds": 300,
+          "datasource": {
+            "type": "marcusolsson-json-datasource",
+            "uid": "${DS_FILSCAN_API}"
+          },
+          "fields": [
+            {
+              "jsonPath": "$.result.total_indicators.latest_height",
+              "name": "",
+              "type": "number"
+            }
+          ],
+          "hide": false,
+          "method": "POST",
+          "queryParams": "",
+          "refId": "A",
+          "urlPath": "/api/v1/TotalIndicators"
+        }
+      ],
+      "title": "Data Height",
+      "transformations": [],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "marcusolsson-json-datasource",
+        "uid": "${DS_FILSCAN_API}"
+      },
+      "description": "Average messages per tipset",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "blue"
+              }
+            ]
+          },
+          "unit": "msgs"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 2,
+        "x": 2,
+        "y": 49
+      },
+      "id": 1008,
+      "interval": "1m",
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "last"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "10.2.3",
+      "targets": [
+        {
+          "body": "{}",
+          "cacheDurationSeconds": 300,
+          "datasource": {
+            "type": "marcusolsson-json-datasource",
+            "uid": "${DS_FILSCAN_API}"
+          },
+          "fields": [
+            {
+              "jsonPath": "$.result.total_indicators.avg_message_count",
+              "name": "",
+              "type": "number"
+            }
+          ],
+          "hide": false,
+          "method": "POST",
+          "queryParams": "",
+          "refId": "A",
+          "urlPath": "/api/v1/TotalIndicators"
+        }
+      ],
+      "title": "Avg msgs",
+      "transformations": [],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "marcusolsson-json-datasource",
+        "uid": "${DS_FILSCAN_API}"
+      },
+      "description": "Average blocks per tipset",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "blue"
+              }
+            ]
+          },
+          "unit": "blocks"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 2,
+        "x": 4,
+        "y": 49
+      },
+      "id": 1009,
+      "interval": "1m",
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "last"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "10.2.3",
+      "targets": [
+        {
+          "body": "{}",
+          "cacheDurationSeconds": 300,
+          "datasource": {
+            "type": "marcusolsson-json-datasource",
+            "uid": "${DS_FILSCAN_API}"
+          },
+          "fields": [
+            {
+              "jsonPath": "$.result.total_indicators.avg_block_count",
+              "name": "",
+              "type": "number"
+            }
+          ],
+          "hide": false,
+          "method": "POST",
+          "queryParams": "",
+          "refId": "A",
+          "urlPath": "/api/v1/TotalIndicators"
+        }
+      ],
+      "title": "Avg Blocks",
+      "transformations": [],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "marcusolsson-json-datasource",
+        "uid": "${DS_FILSCAN_API}"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "blue"
+              }
+            ]
+          },
+          "unit": "miners"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 2,
+        "x": 6,
+        "y": 49
+      },
+      "id": 996,
+      "interval": "1m",
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "last"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "10.2.3",
+      "targets": [
+        {
+          "body": "{}",
+          "cacheDurationSeconds": 300,
+          "datasource": {
+            "type": "marcusolsson-json-datasource",
+            "uid": "${DS_FILSCAN_API}"
+          },
+          "fields": [
+            {
+              "jsonPath": "$.result.total_indicators.active_miners",
+              "name": "",
+              "type": "number"
+            }
+          ],
+          "hide": false,
+          "method": "POST",
+          "queryParams": "",
+          "refId": "A",
+          "urlPath": "/api/v1/TotalIndicators"
+        }
+      ],
+      "title": "Active miners",
+      "transformations": [],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "marcusolsson-json-datasource",
+        "uid": "${DS_FILSCAN_API}"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "blue"
+              }
+            ]
+          },
+          "unit": "bytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 2,
+        "x": 8,
+        "y": 49
+      },
+      "id": 998,
+      "interval": "1m",
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "last"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "10.2.3",
+      "targets": [
+        {
+          "body": "{}",
+          "cacheDurationSeconds": 300,
+          "datasource": {
+            "type": "marcusolsson-json-datasource",
+            "uid": "${DS_FILSCAN_API}"
+          },
+          "fields": [
+            {
+              "jsonPath": "$.result.total_indicators.total_quality_power",
+              "name": "",
+              "type": "number"
+            }
+          ],
+          "hide": false,
+          "method": "POST",
+          "queryParams": "",
+          "refId": "A",
+          "urlPath": "/api/v1/TotalIndicators"
+        }
+      ],
+      "title": "Network QaP",
+      "transformations": [],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "marcusolsson-json-datasource",
+        "uid": "${DS_FILSCAN_API}"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red"
+              },
+              {
+                "color": "green",
+                "value": 0
+              }
+            ]
+          },
+          "unit": "bytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 2,
+        "x": 10,
+        "y": 49
+      },
+      "id": 1000,
+      "interval": "1m",
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "last"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "10.2.3",
+      "targets": [
+        {
+          "body": "{}",
+          "cacheDurationSeconds": 300,
+          "datasource": {
+            "type": "marcusolsson-json-datasource",
+            "uid": "${DS_FILSCAN_API}"
+          },
+          "fields": [
+            {
+              "jsonPath": "$.result.total_indicators.power_increase_24h",
+              "name": "",
+              "type": "number"
+            }
+          ],
+          "hide": false,
+          "method": "POST",
+          "queryParams": "",
+          "refId": "A",
+          "urlPath": "/api/v1/TotalIndicators"
+        }
+      ],
+      "title": "Var QaP 24H",
+      "transformations": [],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "marcusolsson-json-datasource",
+        "uid": "${DS_FILSCAN_API}"
+      },
+      "description": "24H Fil per TiB reward",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "blue"
+              }
+            ]
+          },
+          "unit": "Fil/TiB"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 2,
+        "x": 12,
+        "y": 49
+      },
+      "id": 1001,
+      "interval": "1m",
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "last"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "10.2.3",
+      "targets": [
+        {
+          "body": "{}",
+          "cacheDurationSeconds": 300,
+          "datasource": {
+            "type": "marcusolsson-json-datasource",
+            "uid": "${DS_FILSCAN_API}"
+          },
+          "fields": [
+            {
+              "jsonPath": "$.result.total_indicators.fil_per_tera_24h",
+              "name": "",
+              "type": "number"
+            }
+          ],
+          "hide": false,
+          "method": "POST",
+          "queryParams": "",
+          "refId": "A",
+          "urlPath": "/api/v1/TotalIndicators"
+        }
+      ],
+      "title": "Reward",
+      "transformations": [
+        {
+          "id": "calculateField",
+          "options": {
+            "binary": {
+              "left": "fil_per_tera_24h",
+              "operator": "/",
+              "reducer": "sum",
+              "right": "1000000000000000000"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            },
+            "replaceFields": true
+          }
+        }
+      ],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "marcusolsson-json-datasource",
+        "uid": "${DS_FILSCAN_API}"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "blue"
+              }
+            ]
+          },
+          "unit": "Fil"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 2,
+        "x": 14,
+        "y": 49
+      },
+      "id": 995,
+      "interval": "1m",
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "last"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "10.2.3",
+      "targets": [
+        {
+          "body": "{}",
+          "cacheDurationSeconds": 300,
+          "datasource": {
+            "type": "marcusolsson-json-datasource",
+            "uid": "${DS_FILSCAN_API}"
+          },
+          "fields": [
+            {
+              "jsonPath": "$.result.total_indicators.win_count_reward",
+              "name": "",
+              "type": "number"
+            }
+          ],
+          "hide": false,
+          "method": "POST",
+          "queryParams": "",
+          "refId": "A",
+          "urlPath": "/api/v1/TotalIndicators"
+        }
+      ],
+      "title": "Block Reward",
+      "transformations": [
+        {
+          "id": "calculateField",
+          "options": {
+            "binary": {
+              "left": "win_count_reward",
+              "operator": "/",
+              "reducer": "sum",
+              "right": "1000000000000000000"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            },
+            "replaceFields": true
+          }
+        }
+      ],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "marcusolsson-json-datasource",
+        "uid": "${DS_FILSCAN_API}"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "blue"
+              }
+            ]
+          },
+          "unit": "Fil/TiB"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 2,
+        "x": 16,
+        "y": 49
+      },
+      "id": 999,
+      "interval": "1m",
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "last"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "10.2.3",
+      "targets": [
+        {
+          "body": "{}",
+          "cacheDurationSeconds": 300,
+          "datasource": {
+            "type": "marcusolsson-json-datasource",
+            "uid": "${DS_FILSCAN_API}"
+          },
+          "fields": [
+            {
+              "jsonPath": "$.result.total_indicators.miner_initial_pledge",
+              "name": "",
+              "type": "number"
+            }
+          ],
+          "hide": false,
+          "method": "POST",
+          "queryParams": "",
+          "refId": "A",
+          "urlPath": "/api/v1/TotalIndicators"
+        }
+      ],
+      "title": "Sector Pledge",
+      "transformations": [
+        {
+          "id": "calculateField",
+          "options": {
+            "binary": {
+              "left": "miner_initial_pledge",
+              "operator": "/",
+              "reducer": "sum",
+              "right": "1000000000000000000"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            },
+            "replaceFields": true
+          }
+        }
+      ],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "marcusolsson-json-datasource",
+        "uid": "${DS_FILSCAN_API}"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "#EAB839",
+                "value": 0.8
+              },
+              {
+                "color": "red",
+                "value": 1.5
+              }
+            ]
+          },
+          "unit": "Fil/TiB"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 2,
+        "x": 18,
+        "y": 49
+      },
+      "id": 997,
+      "interval": "1m",
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "last"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "10.2.3",
+      "targets": [
+        {
+          "body": "{}",
+          "cacheDurationSeconds": 300,
+          "datasource": {
+            "type": "marcusolsson-json-datasource",
+            "uid": "${DS_FILSCAN_API}"
+          },
+          "fields": [
+            {
+              "jsonPath": "$.result.total_indicators.gas_in_32g",
+              "name": "",
+              "type": "number"
+            }
+          ],
+          "hide": false,
+          "method": "POST",
+          "queryParams": "",
+          "refId": "A",
+          "urlPath": "/api/v1/TotalIndicators"
+        }
+      ],
+      "title": "32G sector gas",
+      "transformations": [
+        {
+          "id": "calculateField",
+          "options": {
+            "binary": {
+              "left": "gas_in_32g",
+              "operator": "/",
+              "reducer": "sum",
+              "right": "1000000000000000000"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            },
+            "replaceFields": true
+          }
+        }
+      ],
+      "type": "stat"
+    },
+    {
+      "collapsed": false,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "mNFGdTvMk"
+      },
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 51
+      },
+      "id": 64,
+      "panels": [],
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "mNFGdTvMk"
+          },
+          "refId": "A"
+        }
+      ],
+      "title": "Main",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 0,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red"
+              },
+              {
+                "color": "orange",
+                "value": -5
+              },
+              {
+                "color": "green",
+                "value": -3
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Diff {__name__=\"lotus_chain_height\", instance=\"green.twinquasar.io\", miner_id=\"f010479\"}"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Diff"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 5,
+        "x": 0,
+        "y": 52
+      },
+      "id": 1030,
+      "interval": "1m",
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "10.2.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "__expr__",
+            "uid": "${DS_EXPRESSION}"
+          },
+          "expression": "(${__to}/1000 - 1598306400)/ 30",
+          "hide": false,
+          "refId": "CurrentEpoch",
+          "type": "math"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "lotus_chain_height{miner_id=\"$miner_id\"}",
+          "hide": false,
+          "instant": true,
+          "legendFormat": "Chain Head",
+          "range": false,
+          "refId": "NodeEpoch"
+        },
+        {
+          "datasource": {
+            "type": "__expr__",
+            "uid": "${DS_EXPRESSION}"
+          },
+          "expression": "$NodeEpoch-$CurrentEpoch",
+          "hide": false,
+          "refId": "Diff",
+          "type": "math"
+        }
+      ],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "blue"
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 2,
+        "x": 5,
+        "y": 52
+      },
+      "id": 55,
+      "interval": "1m",
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "center",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "last"
+          ],
+          "fields": "/.*/",
+          "values": true
+        },
+        "text": {},
+        "textMode": "value",
+        "wideLayout": true
+      },
+      "pluginVersion": "10.2.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "expr": "lotus_info{miner_id=\"$miner_id\"}",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "transformations": [
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Time": true,
+              "__name__": true,
+              "instance": true,
+              "job": true,
+              "miner_id": true,
+              "version": true
+            },
+            "indexByName": {},
+            "renameByName": {}
+          }
+        }
+      ],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "center",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "filterable": false,
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "blue"
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 3,
+        "x": 7,
+        "y": 52
+      },
+      "id": 53,
+      "interval": "1m",
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": false
+      },
+      "pluginVersion": "10.2.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "expr": "lotus_info{miner_id=\"$miner_id\"}",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "title": "Daemon Version",
+      "transformations": [
+        {
+          "id": "seriesToColumns",
+          "options": {}
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Time": true,
+              "Value": true,
+              "__name__": true,
+              "daemon_version": false,
+              "instance": true,
+              "job": true,
+              "miner_id": true,
+              "network": true
+            },
+            "indexByName": {},
+            "renameByName": {}
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "center",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "filterable": false,
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "blue"
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 3,
+        "x": 10,
+        "y": 52
+      },
+      "id": 54,
+      "interval": "1m",
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": false
+      },
+      "pluginVersion": "10.2.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "expr": "lotus_miner_info{miner_id=\"$miner_id\"}",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "title": "Miner Version",
+      "transformations": [
+        {
+          "id": "seriesToColumns",
+          "options": {}
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Time": true,
+              "Value": true,
+              "__name__": true,
+              "control0": true,
+              "control0_addr": true,
+              "daemon_version": false,
+              "instance": true,
+              "job": true,
+              "miner_id": true,
+              "owner": true,
+              "owner_addr": true,
+              "version": false,
+              "worker": true,
+              "worker_addr": true
+            },
+            "indexByName": {},
+            "renameByName": {}
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "collapsed": false,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "mNFGdTvMk"
+      },
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 56
+      },
+      "id": 572,
+      "panels": [],
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "mNFGdTvMk"
+          },
+          "refId": "A"
+        }
+      ],
+      "title": "Sealing",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "Sectors",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 100,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 0,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "normal"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "decimals": 0,
+          "mappings": [],
+          "min": 0,
+          "noValue": "0",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Errors"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#C4162A",
+                  "mode": "fixed"
+                }
+              },
+              {
+                "id": "custom.fillOpacity",
+                "value": 0
+              },
+              {
+                "id": "custom.lineWidth",
+                "value": 0
+              },
+              {
+                "id": "custom.lineWidth",
+                "value": 2
+              },
+              {
+                "id": "custom.stacking",
+                "value": {
+                  "group": "A",
+                  "mode": "none"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "/Total/"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "rgba(0, 0, 0, 0)",
+                  "mode": "fixed"
+                }
+              },
+              {
+                "id": "custom.drawStyle",
+                "value": "points"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Idle"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#FA6400",
+                  "mode": "fixed"
+                }
+              },
+              {
+                "id": "custom.fillOpacity",
+                "value": 0
+              },
+              {
+                "id": "custom.lineWidth",
+                "value": 0
+              },
+              {
+                "id": "custom.lineWidth",
+                "value": 2
+              },
+              {
+                "id": "custom.stacking",
+                "value": {
+                  "group": "A",
+                  "mode": "none"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Waiting Chain"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#73BF69",
+                  "mode": "fixed"
+                }
+              },
+              {
+                "id": "custom.fillOpacity",
+                "value": 0
+              },
+              {
+                "id": "custom.lineWidth",
+                "value": 0
+              },
+              {
+                "id": "custom.lineWidth",
+                "value": 2
+              },
+              {
+                "id": "custom.stacking",
+                "value": {
+                  "group": "A",
+                  "mode": "none"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "AP"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#E0B400",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "PC1"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#1F60C4",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "PC2"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#161e80",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "C1 / C2"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#d91984",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "GET / FINALIZE"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#bd00fc",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byValue",
+              "options": {
+                "op": "gte",
+                "reducer": "allIsZero",
+                "value": 0
+              }
+            },
+            "properties": [
+              {
+                "id": "custom.hideFrom",
+                "value": {
+                  "legend": true,
+                  "tooltip": true,
+                  "viz": false
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byValue",
+              "options": {
+                "op": "gte",
+                "reducer": "allIsNull",
+                "value": 0
+              }
+            },
+            "properties": [
+              {
+                "id": "custom.hideFrom",
+                "value": {
+                  "legend": true,
+                  "tooltip": true,
+                  "viz": false
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 10,
+        "x": 0,
+        "y": 57
+      },
+      "id": 60,
+      "interval": "1m",
+      "options": {
+        "legend": {
+          "calcs": [
+            "last"
+          ],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true,
+          "width": 210
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "10.0.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "exemplar": true,
+          "expr": "# REtourne le nombre de JOB dans l'etat running\nlabel_replace(count by (task) (lotus_miner_worker_job{miner_id=\"$miner_id\",run_wait=\"0\"}),\"task\",\"running_$1\",\"task\",\"(.*)\")",
+          "format": "time_series",
+          "hide": false,
+          "instant": false,
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "{{ task }}",
+          "refId": "D"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "exemplar": true,
+          "expr": "label_replace(count by (state) (lotus_miner_sector_state{miner_id=\"$miner_id\", state!~\"(Proving|Removed|Available)\"} unless on (sector_id) lotus_miner_worker_job{miner_id=\"$miner_id\",run_wait=\"0\"}),\"state\",\"not_running_$1\",\"state\",\"(.*)\")",
+          "format": "time_series",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{ state }}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Sealing jobs All (Running VS Idle)",
+      "transformations": [
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "C1/C2",
+            "mode": "reduceRow",
+            "reduce": {
+              "include": [
+                "running_seal/v0/commit/1",
+                "running_seal/v0/commit/2",
+                "not_running_SubmitCommit"
+              ],
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "PR1/PR2",
+            "mode": "reduceRow",
+            "reduce": {
+              "include": [
+                "running_seal/v0/provereplicaupdate/1",
+                "running_seal/v0/provereplicaupdate/2"
+              ],
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "GET / FINALIZE",
+            "mode": "reduceRow",
+            "reduce": {
+              "include": [
+                "running_seal/v0/fetch",
+                "running_seal/v0/finalize",
+                "not_running_CommitFinalize"
+              ],
+              "reducer": "sum"
+            },
+            "replaceFields": false
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Total Running",
+            "mode": "reduceRow",
+            "reduce": {
+              "include": [
+                "running_seal/v0/addpiece",
+                "running_seal/v0/precommit/1",
+                "running_seal/v0/precommit/2",
+                "C1/C2",
+                "GET / FINALIZE"
+              ],
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Errors",
+            "mode": "reduceRow",
+            "reduce": {
+              "include": [
+                "not_running_SealPreCommit2Failed",
+                "not_running_ReplicaUpdateFailed"
+              ],
+              "reducer": "sum"
+            },
+            "replaceFields": false
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Waiting Chain",
+            "mode": "reduceRow",
+            "reduce": {
+              "include": [
+                "not_running_CommitWait",
+                "not_running_PreCommitWait",
+                "not_running_WaitSeed",
+                "not_running_ReplicaUpdateWait"
+              ],
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Idle",
+            "mode": "reduceRow",
+            "reduce": {
+              "include": [
+                "not_running_CommitFinalize",
+                "not_running_Committing",
+                "not_running_PreCommit1",
+                "not_running_PreCommit2",
+                "not_running_ProveReplicaUpdate",
+                "not_running_SnapDealsAddPiece",
+                "not_running_UpdateReplica",
+                "not_running_Packing"
+              ],
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Total not Running",
+            "mode": "reduceRow",
+            "reduce": {
+              "include": [
+                "Errors",
+                "Waiting Chain",
+                "Idle"
+              ],
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "CommitFailed": true,
+              "CommitWait": true,
+              "Committing": true,
+              "ComputeProofFailed": true,
+              "FinalizeFailed": true,
+              "FinalizeSector": true,
+              "PreCommit1": true,
+              "PreCommit2": true,
+              "PreCommitWait": true,
+              "PreCommitting": true,
+              "RecoverDealIDs": true,
+              "SealPreCommit1Failed": true,
+              "SealPreCommit2Failed": true,
+              "SubmitCommit": true,
+              "TerminateWait": true,
+              "Terminating": true,
+              "Time": false,
+              "WaitDeals": true,
+              "WaitSeed": true,
+              "not_running_AddPiece": true,
+              "not_running_CommitFinalize": true,
+              "not_running_CommitWait": true,
+              "not_running_Committing": true,
+              "not_running_FinalizeReplicaUpdate": true,
+              "not_running_Packing": true,
+              "not_running_PreCommit1": true,
+              "not_running_PreCommit2": true,
+              "not_running_PreCommitWait": true,
+              "not_running_ProveReplicaUpdate": true,
+              "not_running_Removing": true,
+              "not_running_ReplicaUpdateFailed": true,
+              "not_running_ReplicaUpdateWait": true,
+              "not_running_SealPreCommit1Failed": true,
+              "not_running_SealPreCommit2Failed": true,
+              "not_running_SnapDealsAddPiece": true,
+              "not_running_SubmitCommit": true,
+              "not_running_UpdateActivating": true,
+              "not_running_UpdateReplica": true,
+              "not_running_WaitSeed": true,
+              "running_seal/v0/commit/1": true,
+              "running_seal/v0/commit/2": true,
+              "running_seal/v0/fetch": true,
+              "running_seal/v0/finalize": true,
+              "running_seal/v0/provereplicaupdate/1": true,
+              "running_seal/v0/provereplicaupdate/2": true,
+              "seal/v0/commit/1": true,
+              "seal/v0/commit/2": true,
+              "seal/v0/fetch": true,
+              "seal/v0/finalize": true
+            },
+            "indexByName": {
+              "C1/C2": 5,
+              "Errors": 12,
+              "GET / FINALIZE": 8,
+              "Idle": 11,
+              "PR1/PR2": 6,
+              "Time": 0,
+              "Total Running": 1,
+              "Total not Running": 9,
+              "Waiting Chain": 10,
+              "not_running_CommitFinalize": 19,
+              "not_running_CommitWait": 20,
+              "not_running_Committing": 21,
+              "not_running_Packing": 22,
+              "not_running_PreCommit1": 23,
+              "not_running_PreCommit2": 24,
+              "not_running_PreCommitWait": 25,
+              "not_running_ProveReplicaUpdate": 26,
+              "not_running_Removing": 27,
+              "not_running_ReplicaUpdateFailed": 28,
+              "not_running_ReplicaUpdateWait": 29,
+              "not_running_SealPreCommit2Failed": 30,
+              "not_running_SnapDealsAddPiece": 31,
+              "not_running_UpdateActivating": 32,
+              "not_running_UpdateReplica": 33,
+              "not_running_WaitSeed": 34,
+              "running_seal/v0/addpiece": 2,
+              "running_seal/v0/commit/1": 13,
+              "running_seal/v0/commit/2": 14,
+              "running_seal/v0/fetch": 17,
+              "running_seal/v0/finalize": 18,
+              "running_seal/v0/precommit/1": 3,
+              "running_seal/v0/precommit/2": 4,
+              "running_seal/v0/provereplicaupdate/1": 15,
+              "running_seal/v0/provereplicaupdate/2": 16,
+              "running_seal/v0/replicaupdate": 7
+            },
+            "renameByName": {
+              "C1/C2": "C1 / C2",
+              "CommitFailed": "INCLUDED IN WAITING ERRORS",
+              "CommitWait": "INCLUDED IN WAITING CHAIN",
+              "Committing": "INCLUDED IN IDLE",
+              "ComputeProofFailed": "INCLUDED IN ERRORS",
+              "Errors": "Errors",
+              "FinalizeFailed": "INCLUDED IN ERRORS",
+              "FinalizeSector": "INCLUDED IN WAITING CHAIN",
+              "GET / FINALIZE": "GET / FINALIZE",
+              "Idle": "Idle",
+              "PR1/PR2": "PR1 / PR2",
+              "PreCommit1": "INCLUDED IN IDLE",
+              "PreCommit2": "INCLUDED IN IDLE",
+              "PreCommitWait": "INCLUDED IN WAITING CHAIN",
+              "PreCommitting": "INCLUDED IN IDLE",
+              "RecoverDealIDs": "INCLUDED IN WAITING ERRORS",
+              "SealPreCommit1Failed": "INCLUDED IN ERRORS",
+              "SealPreCommit2Failed": "INCLUDED IN ERRORS",
+              "SubmitCommit": "INCLUDED IN IDLE",
+              "TerminateWait": "INCLUDED IN WAITING CHAIN",
+              "Terminating": "INCLUDED IN WAITING ERRORS",
+              "Time": "Time",
+              "Total Running": "Total Running",
+              "Total Waiting": "",
+              "Total not Running": "Total not Running",
+              "WaitDeals": "INCLUDED IN WAITING IDLE",
+              "WaitSeed": "INCLUDED IN WAITING IDLE",
+              "Waiting": "",
+              "Waiting Chain": "Waiting Chain",
+              "not_running_AddPiece": "XXX ALREADY INCLUDED in Idle",
+              "not_running_CommitFinalize": "XXX ALREADY INCLUDED in Idle",
+              "not_running_CommitWait": "XXX ALREADY INCLUDED in Waiting Chain",
+              "not_running_Committing": "XXX ALREADY INCLUDED in Idle",
+              "not_running_FinalizeReplicaUpdate": "XXX ALREADY INCLUDED in GET / FINALIZED",
+              "not_running_Packing": "XXX ALREADY INCLUDED in Idle",
+              "not_running_PreCommit1": "XXX ALREADY INCLUDED in Idle",
+              "not_running_PreCommit2": "XXX ALREADY INCLUDED in Idle",
+              "not_running_PreCommitWait": "XXX ALREADY INCLUDED in Waiting Chain",
+              "not_running_ProveReplicaUpdate": "XXX ALREADY INCLUDED in Idle",
+              "not_running_Removing": "XXX No need to display the removing",
+              "not_running_ReplicaUpdateFailed": "XXX ALREADY INCLUDED in Error",
+              "not_running_ReplicaUpdateWait": "XXX ALREADY INCLUDED in Waiting Chain",
+              "not_running_SealPreCommit1Failed": "XXX ALREADY INCLUDED in Error",
+              "not_running_SealPreCommit2Failed": "XXX ALREADY INCLUDED in Error",
+              "not_running_SnapDealsAddPiece": "XXX ALREADY INCLUDED in Idle",
+              "not_running_SubmitCommit": "XXX ALREADY INCLUDED in C1/C2",
+              "not_running_UpdateActivating": "XXX Stay here until deadline passed",
+              "not_running_UpdateReplica": "XXX ALREADY INCLUDED in Idle",
+              "not_running_WaitSeed": "XXX ALREADY INCLUDED in Waiting Chain",
+              "running_seal/v0/addpiece": "AP",
+              "running_seal/v0/commit/1": "XXX ALREADY INCLUDED in C1/C2",
+              "running_seal/v0/commit/2": "XXX ALREADY INCLUDED in C1/C2",
+              "running_seal/v0/fetch": "XXX ALREADY INCLUDED in GET / FINALIZED",
+              "running_seal/v0/finalize": "XXX ALREADY INCLUDED in GET / FINALIZED",
+              "running_seal/v0/precommit/1": "PC1",
+              "running_seal/v0/precommit/2": "PC2",
+              "running_seal/v0/provereplicaupdate/1": "XXX ALREADY INCLUDED in PR1/PR2",
+              "running_seal/v0/provereplicaupdate/2": "XXX ALREADY INCLUDED in PR1/PR2",
+              "running_seal/v0/replicaupdate": "RU",
+              "seal/v0/addpiece": "AP",
+              "seal/v0/commit/1": "INCLUDED IN C1/ C2",
+              "seal/v0/commit/2": "INCLUDED IN C1/ C2",
+              "seal/v0/fetch": "INCLUDED IN GET / FINALIZE",
+              "seal/v0/finalize": "INCLUDED IN GET / FINALIZE",
+              "seal/v0/precommit/1": "PC1",
+              "seal/v0/precommit/2": "PC2",
+              "seal/v0/unsealread": "Unseal",
+              "{task=\"WaitSeed\"}": "WaitSeed",
+              "{task=\"seal/v0/addpiece\"}": "AP",
+              "{task=\"seal/v0/commit/1\"}": "C1",
+              "{task=\"seal/v0/commit/2\"}": "C2",
+              "{task=\"seal/v0/fetch\"}": "GET",
+              "{task=\"seal/v0/finalize\"}": "Finalize",
+              "{task=\"seal/v0/precommit/1\"}": "PC1",
+              "{task=\"seal/v0/precommit/2\"}": "PC2"
+            }
+          }
+        }
+      ],
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "filterable": true,
+            "inspect": false
+          },
+          "decimals": 0,
+          "mappings": [],
+          "noValue": "-",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "blue"
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Sector Creation"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 197
+              },
+              {
+                "id": "unit",
+                "value": "dateTimeAsIsoNoDateIfToday"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "ID"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 51
+              },
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "0": {
+                        "text": ""
+                      }
+                    },
+                    "type": "value"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Sector"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 84
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Worker"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 78
+              },
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "0": {
+                        "text": "-"
+                      }
+                    },
+                    "type": "value"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Status"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 126
+              },
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "Committing": {
+                        "text": "C1/C2"
+                      },
+                      "PreCommit1": {
+                        "text": "PC1"
+                      },
+                      "PreCommit2": {
+                        "text": "PC2"
+                      }
+                    },
+                    "type": "value"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Duration"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 92
+              },
+              {
+                "id": "unit",
+                "value": "dthms"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Deals"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 68
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "gradient",
+                  "type": "color-background"
+                }
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "rgba(115, 191, 105, 0)"
+                    },
+                    {
+                      "color": "green",
+                      "value": 1
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "0": {
+                        "text": "-"
+                      }
+                    },
+                    "type": "value"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Remaining"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 98
+              },
+              {
+                "id": "unit",
+                "value": "s"
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "gradient",
+                  "type": "color-background"
+                }
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "rgba(115, 191, 105, 0)"
+                    },
+                    {
+                      "color": "orange",
+                      "value": 1
+                    },
+                    {
+                      "color": "red",
+                      "value": 300
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Action"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 92
+              },
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "0": {
+                        "text": "Running"
+                      },
+                      "1": {
+                        "text": "Assigned(0)"
+                      },
+                      "2": {
+                        "text": "Assigned(1)"
+                      },
+                      "98": {
+                        "text": "Idle"
+                      },
+                      "99": {
+                        "text": "In Sched"
+                      }
+                    },
+                    "type": "value"
+                  }
+                ]
+              },
+              {
+                "id": "noValue",
+                "value": "Idle"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Verified Weight"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 131
+              },
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "0": {
+                        "text": ""
+                      }
+                    },
+                    "type": "value"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "verified_weight"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 139
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 20,
+        "w": 7,
+        "x": 10,
+        "y": 57
+      },
+      "id": 502,
+      "interval": "1m",
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": true,
+            "displayName": "Status"
+          }
+        ]
+      },
+      "pluginVersion": "10.2.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "expr": "# Retourne tout les secteurs qui sont sur les workers mais dans un statut different de Running. On les enrichis avec les infos des workers (Assigned par exemple)\n(lotus_miner_sector_state{miner_id=\"$miner_id\", state!~\"(Proving|Removed|Available|UpdateActivating)\"} * on (sector_id) group_left(job_id,run_wait,job_start_time,task,worker) lotus_miner_worker_job{miner_id=\"$miner_id\", run_wait!=\"0\"})*1",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "title": "IDLE Sealing Sectors",
+      "transformations": [
+        {
+          "id": "merge",
+          "options": {}
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Sector Creation",
+            "binary": {
+              "left": "Value #D",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "1000"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            },
+            "replaceFields": false
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "ID",
+            "binary": {
+              "left": "job_id",
+              "operator": "+",
+              "reducer": "sum",
+              "right": "0"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Action",
+            "binary": {
+              "left": "run_wait",
+              "operator": "+",
+              "reducer": "sum",
+              "right": "0"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "binary": {
+              "left": "worker",
+              "operator": "+",
+              "reducer": "sum",
+              "right": "0"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Action": true,
+              "ID": true,
+              "Sector Creation": false,
+              "Time": true,
+              "Time 1": true,
+              "Time 2": true,
+              "Time 3": true,
+              "Value #A": false,
+              "Value #B": true,
+              "Value #C": true,
+              "Value #D": true,
+              "Verified Weight": true,
+              "__name__": true,
+              "__name__ 1": true,
+              "__name__ 2": true,
+              "creation_date": true,
+              "deals": false,
+              "event_type": true,
+              "instance": true,
+              "instance 1": true,
+              "instance 2": true,
+              "instance 3": true,
+              "job": true,
+              "job 1": true,
+              "job 2": true,
+              "job 3": true,
+              "job_id": true,
+              "job_id 1": false,
+              "job_id 2": true,
+              "job_start_time": true,
+              "job_start_time 1": true,
+              "job_start_time 2": true,
+              "miner_id": true,
+              "miner_id 1": true,
+              "miner_id 2": true,
+              "miner_id 3": true,
+              "pledged": true,
+              "run_wait": false,
+              "run_wait 1": false,
+              "run_wait 2": true,
+              "sector": false,
+              "sector 1": true,
+              "sector 2": true,
+              "sector_id": false,
+              "state": false,
+              "task": true,
+              "task 1": false,
+              "task 2": true,
+              "to_upgrade": true,
+              "verified_weight": true,
+              "worker": true,
+              "worker 1": false,
+              "worker 2": true
+            },
+            "indexByName": {
+              "Action": 8,
+              "Deals": 13,
+              "ID": 1,
+              "Sector Creation": 12,
+              "Time": 16,
+              "Value #A": 11,
+              "Value #C": 9,
+              "Value #D": 24,
+              "Verified Weight": 14,
+              "__name__": 22,
+              "deals": 10,
+              "event_type": 23,
+              "instance": 17,
+              "job": 18,
+              "job_id": 2,
+              "job_start_time": 20,
+              "miner_id": 19,
+              "pledged": 21,
+              "run_wait": 7,
+              "sector_id": 0,
+              "state": 6,
+              "task": 5,
+              "verified_weight": 15,
+              "worker": 3,
+              "worker + 0": 4
+            },
+            "renameByName": {
+              "Deals": "Deals",
+              "Sector Creation": "",
+              "Time": "",
+              "Value #A": "Duration",
+              "Value #B": "",
+              "Value #C": "",
+              "Value #D": "Creation Date",
+              "creation_date": "",
+              "deals": "Deals",
+              "job_id": "",
+              "job_id 1": "ID",
+              "job_start_time": "",
+              "miner_id": "",
+              "run_wait": "Action",
+              "run_wait 1": "Action",
+              "sector": "Sector",
+              "sector_id": "Sector",
+              "state": "Status",
+              "task": "",
+              "task 1": "",
+              "verified_weight": "",
+              "worker": "",
+              "worker + 0": "Worker",
+              "worker 1": "Worker"
+            }
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "filterable": true,
+            "inspect": false
+          },
+          "decimals": 0,
+          "mappings": [],
+          "noValue": "-",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "blue"
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Sector Creation"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 129
+              },
+              {
+                "id": "unit",
+                "value": "dateTimeAsIsoNoDateIfToday"
+              },
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "0": {
+                        "text": "-"
+                      }
+                    },
+                    "type": "value"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Sector"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 73
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Worker"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 91
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Status"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 72
+              },
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "seal/v0/addpiece": {
+                        "index": 6,
+                        "text": "AP"
+                      },
+                      "seal/v0/commit/1": {
+                        "index": 5,
+                        "text": "C1"
+                      },
+                      "seal/v0/commit/2": {
+                        "index": 4,
+                        "text": "C2"
+                      },
+                      "seal/v0/fetch": {
+                        "index": 3,
+                        "text": "GET"
+                      },
+                      "seal/v0/finalize": {
+                        "index": 2,
+                        "text": "Finalize"
+                      },
+                      "seal/v0/precommit/1": {
+                        "index": 1,
+                        "text": "PC1"
+                      },
+                      "seal/v0/precommit/2": {
+                        "index": 0,
+                        "text": "PC2"
+                      },
+                      "seal/v0/provereplicaupdate/1": {
+                        "index": 9,
+                        "text": "PR1"
+                      },
+                      "seal/v0/provereplicaupdate/2": {
+                        "index": 7,
+                        "text": "PR2"
+                      },
+                      "seal/v0/replicaupdate": {
+                        "index": 8,
+                        "text": "RU"
+                      }
+                    },
+                    "type": "value"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Duration"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 86
+              },
+              {
+                "id": "unit",
+                "value": "dthms"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Deals"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 84
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "gradient",
+                  "type": "color-background"
+                }
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "rgba(115, 191, 105, 0)"
+                    },
+                    {
+                      "color": "green",
+                      "value": 1
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "0": {
+                        "text": "-"
+                      }
+                    },
+                    "type": "value"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Remaining"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 98
+              },
+              {
+                "id": "unit",
+                "value": "s"
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "gradient",
+                  "type": "color-background"
+                }
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "rgba(115, 191, 105, 0)"
+                    },
+                    {
+                      "color": "orange",
+                      "value": 1
+                    },
+                    {
+                      "color": "red",
+                      "value": 300
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Action"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 80
+              },
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "0": {
+                        "text": "Running"
+                      },
+                      "1": {
+                        "text": "Idle"
+                      },
+                      "99": {
+                        "text": "Idle"
+                      }
+                    },
+                    "type": "value"
+                  }
+                ]
+              },
+              {
+                "id": "noValue",
+                "value": "Idle"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "worker_host"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 121
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 20,
+        "w": 7,
+        "x": 17,
+        "y": 57
+      },
+      "id": 469,
+      "interval": "1m",
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": true,
+            "displayName": "Duration"
+          }
+        ]
+      },
+      "pluginVersion": "10.2.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "exemplar": true,
+          "expr": "lotus_miner_worker_job{miner_id=\"$miner_id\",run_wait=\"0\"}",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "",
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "expr": "# Calcul do 95 centile sur 30 jours des jobs par Worker et Par task et calcul le temps restant pour chacun des jobs\nlotus_miner_worker_job{miner_id=\"$miner_id\",run_wait=\"0\"} - on(worker_host,task) group_left()(quantile(0.95,(max_over_time(lotus_miner_worker_job{miner_id=\"$miner_id\",worker_host!=\"\", run_wait=\"0\"}[30d]) > 1)) by (worker_host,task))",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "C"
+        }
+      ],
+      "title": "RUNNING Sealing Sectors",
+      "transformations": [
+        {
+          "id": "merge",
+          "options": {}
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Sector Creation",
+            "binary": {
+              "left": "Value #D",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "1000"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            },
+            "replaceFields": false
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Action",
+            "binary": {
+              "left": "run_wait",
+              "operator": "+",
+              "reducer": "sum",
+              "right": "0"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Action": true,
+              "Time": true,
+              "Time 1": true,
+              "Time 2": true,
+              "Time 3": true,
+              "Value #A": false,
+              "Value #B": true,
+              "Value #C": false,
+              "Value #D": true,
+              "__name__": true,
+              "__name__ 1": true,
+              "__name__ 2": true,
+              "creation_date": true,
+              "deals": false,
+              "event_type": true,
+              "instance": true,
+              "instance 1": true,
+              "instance 2": true,
+              "instance 3": true,
+              "job": true,
+              "job 1": true,
+              "job 2": true,
+              "job 3": true,
+              "job_id": true,
+              "job_id 1": false,
+              "job_id 2": true,
+              "job_start_time": true,
+              "job_start_time 1": true,
+              "job_start_time 2": true,
+              "miner_id": true,
+              "miner_id 1": true,
+              "miner_id 2": true,
+              "miner_id 3": true,
+              "pledged": true,
+              "run_wait": true,
+              "run_wait 1": false,
+              "run_wait 2": true,
+              "sector": false,
+              "sector 1": true,
+              "sector 2": true,
+              "sector_id": false,
+              "state": true,
+              "task": false,
+              "task 1": false,
+              "task 2": true,
+              "worker 1": false,
+              "worker 2": true
+            },
+            "indexByName": {
+              "Action": 3,
+              "Deals": 7,
+              "Sector Creation": 17,
+              "Time": 9,
+              "Value #A": 4,
+              "Value #C": 5,
+              "Value #D": 16,
+              "__name__": 14,
+              "deals": 8,
+              "event_type": 15,
+              "instance": 10,
+              "job": 11,
+              "job_id": 18,
+              "job_start_time": 13,
+              "miner_id": 12,
+              "run_wait": 6,
+              "sector_id": 0,
+              "task": 2,
+              "worker_host": 1
+            },
+            "renameByName": {
+              "Action": "",
+              "Sector Creation": "",
+              "Time": "",
+              "Value #A": "Duration",
+              "Value #B": "",
+              "Value #C": "Remaining",
+              "Value #D": "Creation Date",
+              "creation_date": "",
+              "deals": "Deals",
+              "job_id": "ID",
+              "job_id 1": "ID",
+              "job_start_time": "",
+              "miner_id": "",
+              "run_wait": "",
+              "run_wait 1": "Action",
+              "sector": "Sector",
+              "sector_id": "Sector",
+              "state": "",
+              "task": "Status",
+              "task 1": "",
+              "worker": "Worker",
+              "worker 1": "Worker",
+              "worker_host": "Worker"
+            }
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "description": "Sectors By State",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "min": 0,
+          "noValue": "-",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "blue"
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "CommitFailed"
+            },
+            "properties": [
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "red"
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Removed"
+            },
+            "properties": [
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "#2f2f2f"
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "PC1"
+            },
+            "properties": [
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green"
+                    },
+                    {
+                      "color": "red",
+                      "value": 16
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "WaitSeed"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "PC2"
+            },
+            "properties": [
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green"
+                    },
+                    {
+                      "color": "red",
+                      "value": 1
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "C2"
+            },
+            "properties": [
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green"
+                    },
+                    {
+                      "color": "red",
+                      "value": 2
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "CommitFinalize"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Proving"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "CommitWait"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "AP"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Expired"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "red",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "PreCommitWait"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 8,
+        "x": 0,
+        "y": 65
+      },
+      "id": 67,
+      "interval": "1m",
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "last"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "10.2.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "exemplar": true,
+          "expr": "count by (state) (lotus_miner_sector_state{miner_id=\"$miner_id\"})",
+          "format": "time_series",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "{{state}}",
+          "refId": "D"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "exemplar": true,
+          "expr": "count(lotus_miner_sector_state{state=\"Proving\", miner_id=\"$miner_id\"} unless on (sector_id) lotus_miner_deadline_active_partition_sector{miner_id=\"$miner_id\"})",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "Expired",
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "exemplar": true,
+          "expr": "count(lotus_miner_sector_state{miner_id=\"$miner_id\", to_upgrade=\"True\" })",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "To Upgrade",
+          "refId": "B"
+        }
+      ],
+      "transformations": [
+        {
+          "id": "seriesToColumns",
+          "options": {
+            "byField": "Time"
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Proving": false,
+              "Removed": false,
+              "Time": true
+            },
+            "indexByName": {
+              "AddPiece": 1,
+              "Committing": 5,
+              "Expired": 7,
+              "PreCommit1": 2,
+              "PreCommit2": 3,
+              "Proving": 6,
+              "Removed": 8,
+              "Time": 0,
+              "WaitSeed": 4
+            },
+            "renameByName": {
+              "AddPiece": "AP",
+              "Committing": "C2",
+              "Expired": "Expired",
+              "PreCommit1": "PC1",
+              "PreCommit2": "PC2",
+              "Proving": "Proving",
+              "Removed": "Removed",
+              "seal/v0/addpiece": "AP",
+              "seal/v0/commit/2": "C2",
+              "seal/v0/precommit/1": "PC1",
+              "seal/v0/precommit/2": "PC2"
+            }
+          }
+        }
+      ],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "min": 0,
+          "noValue": "0",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "blue"
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 2,
+        "x": 8,
+        "y": 65
+      },
+      "id": 73,
+      "interval": "1m",
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "last"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "10.2.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "expr": "count (lotus_miner_worker_cpu{miner_id=\"$miner_id\"})",
+          "format": "time_series",
+          "hide": false,
+          "instant": false,
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "Number of Workers",
+          "refId": "D"
+        }
+      ],
+      "transformations": [],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "filterable": true,
+            "inspect": false
+          },
+          "decimals": 2,
+          "mappings": [
+            {
+              "options": {
+                "c2": {
+                  "text": "C2"
+                },
+                "pc1": {
+                  "text": "PC1"
+                },
+                "pc2": {
+                  "text": "PC2"
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "noValue": "-",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "dtdhms"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Task"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 82
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Worker"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 133
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "on 30d"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 76
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Task"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 80
+              },
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "seal/v0/addpiece": {
+                        "index": 7,
+                        "text": "AP"
+                      },
+                      "seal/v0/commit/1": {
+                        "index": 6,
+                        "text": "C1"
+                      },
+                      "seal/v0/commit/2": {
+                        "index": 5,
+                        "text": "C2"
+                      },
+                      "seal/v0/fetch": {
+                        "index": 4,
+                        "text": "GET"
+                      },
+                      "seal/v0/finalize": {
+                        "index": 3,
+                        "text": "Finalize"
+                      },
+                      "seal/v0/precommit/1": {
+                        "index": 2,
+                        "text": "PC1"
+                      },
+                      "seal/v0/precommit/2": {
+                        "index": 1,
+                        "text": "PC2"
+                      },
+                      "seal/v0/provereplicaupdate/1": {
+                        "index": 8,
+                        "text": "PR1"
+                      },
+                      "seal/v0/provereplicaupdate/2": {
+                        "index": 9,
+                        "text": "PR2"
+                      },
+                      "seal/v0/replicaupdate": {
+                        "index": 10,
+                        "text": "RU"
+                      },
+                      "seal/v0/unsealread": {
+                        "index": 0,
+                        "text": "Unseal"
+                      }
+                    },
+                    "type": "value"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Variation"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "percentunit"
+              },
+              {
+                "id": "custom.width",
+                "value": 105
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Variation"
+            },
+            "properties": [
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "gradient",
+                  "type": "color-background"
+                }
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green"
+                    },
+                    {
+                      "color": "rgba(87, 148, 242, 0)",
+                      "value": -0.05
+                    },
+                    {
+                      "color": "orange",
+                      "value": 0.05
+                    },
+                    {
+                      "color": "red",
+                      "value": 0.1
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "on 2d"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 91
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 10,
+        "x": 0,
+        "y": 68
+      },
+      "id": 324,
+      "interval": "1d",
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": false,
+            "displayName": "Task"
+          }
+        ]
+      },
+      "pluginVersion": "10.2.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "expr": "# Calcul do 95 centile sur 30 jours\nquantile(0.95,(max_over_time(lotus_miner_worker_job{miner_id=\"$miner_id\", worker_host!=\"\", run_wait=\"0\"}[30d]) > 1)) by (worker_host,task)",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "{{ legend }} - {{ worker_host }}",
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "expr": "# Calcul do 95 centile sur 2 jours\nquantile(0.95,(max_over_time(lotus_miner_worker_job{miner_id=\"$miner_id\", worker_host!=\"\", run_wait=\"0\"}[2d]) > 1)) by (worker_host,task)",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "{{ legend }} - {{ worker_host }}",
+          "refId": "B"
+        }
+      ],
+      "title": "Average Sealing time",
+      "transformations": [
+        {
+          "id": "merge",
+          "options": {}
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "binary": {
+              "left": "Value #B",
+              "operator": "/",
+              "reducer": "sum",
+              "right": "Value #A"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Variation",
+            "binary": {
+              "left": "Value #B / Value #A",
+              "operator": "-",
+              "reducer": "sum",
+              "right": "1"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Time": true,
+              "Value #B / Value #A": true,
+              "task": false
+            },
+            "indexByName": {
+              "Time": 0,
+              "Value #A": 5,
+              "Value #B": 4,
+              "legend": 2,
+              "task": 3,
+              "worker": 1
+            },
+            "renameByName": {
+              "Value": "Average (30days)",
+              "Value #A": "on 30d",
+              "Value #B": "on 2d",
+              "Value #B / Value #A": "",
+              "legend": "Task",
+              "task": "Task",
+              "worker": "Worker",
+              "worker_host": "Worker"
+            }
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "collapsed": false,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "mNFGdTvMk"
+      },
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 77
+      },
+      "id": 606,
+      "panels": [],
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "mNFGdTvMk"
+          },
+          "refId": "A"
+        }
+      ],
+      "title": "Workers",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 0,
+          "mappings": [],
+          "max": 1,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "orange",
+                "value": 0.8
+              },
+              {
+                "color": "red",
+                "value": 0.98
+              }
+            ]
+          },
+          "unit": "percentunit"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 4.8,
+        "x": 0,
+        "y": 78
+      },
+      "id": 74,
+      "interval": "1m",
+      "maxPerRow": 6,
+      "options": {
+        "displayMode": "lcd",
+        "maxVizHeight": 300,
+        "minVizHeight": 10,
+        "minVizWidth": 0,
+        "namePlacement": "auto",
+        "orientation": "vertical",
+        "reduceOptions": {
+          "calcs": [
+            "last"
+          ],
+          "fields": "",
+          "values": true
+        },
+        "showUnfilled": true,
+        "sizing": "auto",
+        "text": {},
+        "valueMode": "color"
+      },
+      "pluginVersion": "10.2.3",
+      "repeat": "worker_host",
+      "repeatDirection": "h",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "expr": "avg((lotus_miner_worker_cpu_used{miner_id=\"$miner_id\", worker_host=\"$worker_host\"})/(lotus_miner_worker_cpu{miner_id=\"$miner_id\", worker_host=\"$worker_host\"}) >= 0)",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "CPU",
+          "refId": "D"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "expr": "avg((lotus_miner_worker_gpu_used{miner_id=\"$miner_id\", worker_host=\"$worker_host\"})/(lotus_miner_worker_gpu{miner_id=\"$miner_id\", worker_host=\"$worker_host\"}) >= 0)",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "GPU",
+          "refId": "C"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "exemplar": true,
+          "expr": "avg((lotus_miner_worker_ram_tasks{miner_id=\"$miner_id\", worker_host=\"$worker_host\"}+lotus_miner_worker_ram_reserved{miner_id=\"$miner_id\", worker_host=\"$worker_host\"})/(lotus_miner_worker_ram_total{miner_id=\"$miner_id\", worker_host=\"$worker_host\"}) >= 0)",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "RAM",
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "exemplar": true,
+          "expr": "avg((lotus_miner_worker_vmem_tasks{miner_id=\"$miner_id\", worker_host=\"$worker_host\"}+lotus_miner_worker_vmem_reserved{miner_id=\"$miner_id\", worker_host=\"$worker_host\"})/(lotus_miner_worker_vmem_total{miner_id=\"$miner_id\", worker_host=\"$worker_host\"}) >= 0)",
+          "format": "time_series",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "VMEM",
+          "refId": "A"
+        }
+      ],
+      "title": "Resources - $worker_host",
+      "transformations": [],
+      "type": "bargauge"
+    },
+    {
+      "collapsed": false,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "mNFGdTvMk"
+      },
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 83
+      },
+      "id": 20,
+      "panels": [],
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "mNFGdTvMk"
+          },
+          "refId": "A"
+        }
+      ],
+      "title": "Sealing",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "Sectors",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 70,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 0,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "normal"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "decimals": 0,
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "/Total/"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "transparent",
+                  "mode": "fixed"
+                }
+              },
+              {
+                "id": "custom.drawStyle",
+                "value": "points"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byValue",
+              "options": {
+                "op": "gte",
+                "reducer": "allIsZero",
+                "value": 0
+              }
+            },
+            "properties": [
+              {
+                "id": "custom.hideFrom",
+                "value": {
+                  "legend": true,
+                  "tooltip": true,
+                  "viz": false
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byValue",
+              "options": {
+                "op": "gte",
+                "reducer": "allIsNull",
+                "value": 0
+              }
+            },
+            "properties": [
+              {
+                "id": "custom.hideFrom",
+                "value": {
+                  "legend": true,
+                  "tooltip": true,
+                  "viz": false
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 8,
+        "x": 0,
+        "y": 84
+      },
+      "id": 535,
+      "interval": "1m",
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean",
+            "lastNotNull",
+            "max"
+          ],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "10.0.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "expr": "# REtourne le nombre de JOB dans l'etat running\ncount by (task) (lotus_miner_worker_job{miner_id=\"$miner_id\",run_wait=\"0\"})",
+          "format": "time_series",
+          "hide": false,
+          "instant": false,
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "{{ task }}",
+          "refId": "D"
+        }
+      ],
+      "title": "Sealing jobs - RUNNING",
+      "transformations": [
+        {
+          "id": "seriesToColumns",
+          "options": {}
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Total Running",
+            "mode": "reduceRow",
+            "reduce": {
+              "include": [
+                "seal/v0/addpiece",
+                "seal/v0/commit/1",
+                "seal/v0/commit/2",
+                "seal/v0/fetch",
+                "seal/v0/precommit/1",
+                "seal/v0/precommit/2",
+                "seal/v0/provereplicaupdate/2",
+                "seal/v0/replicaupdate",
+                "seal/v0/provereplicaupdate/1"
+              ],
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "CommitFailed": true,
+              "CommitWait": true,
+              "Committing": true,
+              "FinalizeFailed": true,
+              "PreCommit1": true,
+              "PreCommit2": true,
+              "PreCommitWait": true,
+              "PreCommitting": true,
+              "SealPreCommit1Failed": true,
+              "SealPreCommit2Failed": true,
+              "SubmitCommit": true,
+              "Time": false,
+              "WaitDeals": true,
+              "WaitSeed": true
+            },
+            "indexByName": {
+              "Time": 0,
+              "Total Running": 1,
+              "seal/v0/addpiece": 2,
+              "seal/v0/commit/1": 5,
+              "seal/v0/commit/2": 6,
+              "seal/v0/fetch": 7,
+              "seal/v0/precommit/1": 3,
+              "seal/v0/precommit/2": 4
+            },
+            "renameByName": {
+              "CommitWait": "INCLUDED IN WAITING CHAIN",
+              "Committing": "INCLUDED IN IDLE",
+              "Errors": "Errors",
+              "FinalizeFailed": "INCLUDED IN ERRORS",
+              "FinalizeSector": "",
+              "Idle": "Idle",
+              "PreCommit1": "INCLUDED IN IDLE",
+              "PreCommit2": "INCLUDED IN IDLE",
+              "PreCommitWait": "INCLUDED IN WAITING CHAIN",
+              "PreCommitting": "INCLUDED IN IDLE",
+              "SealPreCommit2Failed": "INCLUDED IN ERRORS",
+              "Time": "Time",
+              "Total Running": "Total Running",
+              "Total Waiting": "Total not Running",
+              "WaitSeed": "INCLUDED IN WAITING CHAIN",
+              "Waiting": "",
+              "Waiting Chain": "Waiting Chain",
+              "seal/v0/addpiece": "AP",
+              "seal/v0/commit/1": "C1",
+              "seal/v0/commit/2": "C2",
+              "seal/v0/fetch": "GET",
+              "seal/v0/finalize": "Finalize",
+              "seal/v0/precommit/1": "PC1",
+              "seal/v0/precommit/2": "PC2",
+              "seal/v0/provereplicaupdate/1": "PR1",
+              "seal/v0/provereplicaupdate/2": "PR2",
+              "seal/v0/replicaupdate": "RU",
+              "{task=\"WaitSeed\"}": "WaitSeed",
+              "{task=\"seal/v0/addpiece\"}": "AP",
+              "{task=\"seal/v0/commit/1\"}": "C1",
+              "{task=\"seal/v0/commit/2\"}": "C2",
+              "{task=\"seal/v0/fetch\"}": "GET",
+              "{task=\"seal/v0/finalize\"}": "Finalize",
+              "{task=\"seal/v0/precommit/1\"}": "PC1",
+              "{task=\"seal/v0/precommit/2\"}": "PC2"
+            }
+          }
+        }
+      ],
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "Sectors",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "normal"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "decimals": 0,
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Errors"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#C4162A",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "/Total/"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "rgba(0, 0, 0, 0)",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Idle"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#FADE2A",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Waiting Chain"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#73BF69",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byValue",
+              "options": {
+                "op": "gte",
+                "reducer": "allIsZero",
+                "value": 0
+              }
+            },
+            "properties": [
+              {
+                "id": "custom.hideFrom",
+                "value": {
+                  "legend": true,
+                  "tooltip": true,
+                  "viz": false
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byValue",
+              "options": {
+                "op": "gte",
+                "reducer": "allIsNull",
+                "value": 0
+              }
+            },
+            "properties": [
+              {
+                "id": "custom.hideFrom",
+                "value": {
+                  "legend": true,
+                  "tooltip": true,
+                  "viz": false
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 8,
+        "x": 8,
+        "y": 84
+      },
+      "id": 536,
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean",
+            "lastNotNull",
+            "max"
+          ],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "10.2.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "expr": "count by (state) ((lotus_miner_sector_state{miner_id=\"$miner_id\", state!~\"(Proving|Removed|Available)\"}) unless on (sector_id) lotus_miner_worker_job{miner_id=\"$miner_id\",run_wait=\"0\"})",
+          "format": "time_series",
+          "instant": false,
+          "interval": "",
+          "legendFormat": "{{ state }}",
+          "refId": "A"
+        }
+      ],
+      "title": "Sealing jobs - IDLE",
+      "transformations": [
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Total Waiting",
+            "mode": "reduceRow",
+            "reduce": {
+              "include": [
+                "CommitWait",
+                "PreCommitWait",
+                "WaitSeed",
+                "ReplicaUpdateWait"
+              ],
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Total Idle",
+            "mode": "reduceRow",
+            "reduce": {
+              "include": [
+                "Committing",
+                "PreCommit2",
+                "UpdateReplica",
+                "SnapDealsAddPiece"
+              ],
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "AddPiece": false,
+              "CommitFailed": true,
+              "CommitFinalizeFailed": true,
+              "CommitWait": false,
+              "Committing": false,
+              "FinalizeFailed": true,
+              "PreCommit1": false,
+              "PreCommit2": false,
+              "PreCommitWait": false,
+              "PreCommitting": false,
+              "RecoverDealIDs": true,
+              "ReplicaUpdateFailed": true,
+              "SealPreCommit1Failed": true,
+              "SealPreCommit2Failed": true,
+              "SubmitCommit": false,
+              "Terminating": true,
+              "Time": false,
+              "UpdateActivating": true,
+              "WaitDeals": true,
+              "WaitSeed": false
+            },
+            "indexByName": {
+              "CommitFinalize": 9,
+              "CommitWait": 4,
+              "Committing": 8,
+              "PreCommit2": 7,
+              "PreCommitWait": 3,
+              "ReplicaUpdateFailed": 11,
+              "SealPreCommit2Failed": 12,
+              "SnapDealsAddPiece": 6,
+              "Time": 0,
+              "Total Idle": 5,
+              "Total Waiting": 1,
+              "UpdateReplica": 10,
+              "WaitSeed": 2
+            },
+            "renameByName": {
+              "AddPiece": "Idle - AP",
+              "CommitFinalize": "Idle - CommitFinalize",
+              "CommitWait": "",
+              "Committing": "Idle - C1/C2",
+              "Errors": "Errors",
+              "FinalizeFailed": "HIDDEN",
+              "FinalizeSector": "",
+              "Idle": "Idle",
+              "Packing": "Idle - AP",
+              "PreCommit1": "Idle - PC1",
+              "PreCommit2": "Idle - PC2",
+              "PreCommitWait": "",
+              "PreCommitting": "Idle - PC (Other ?!?)",
+              "ProveReplicaUpdate": "Idle - PRU",
+              "ReplicaUpdateFailed": "HIDDEN",
+              "ReplicaUpdateWait": "",
+              "SealPreCommit2Failed": "HIDDEN",
+              "SnapDealsAddPiece": "Idle - Snap AP",
+              "Time": "Time",
+              "Total Idle": "Total Idle",
+              "Total Running": "Total Running",
+              "Total Waiting": "Total Waiting",
+              "UpdateActivating": "HIDDEN",
+              "UpdateReplica": "Idle - UR",
+              "WaitSeed": "",
+              "Waiting": "",
+              "Waiting Chain": "Waiting Chain",
+              "seal/v0/addpiece": "AP",
+              "seal/v0/commit/1": "C1",
+              "seal/v0/commit/2": "C2",
+              "seal/v0/fetch": "GET",
+              "seal/v0/precommit/1": "PC1",
+              "seal/v0/precommit/2": "PC2",
+              "{task=\"WaitSeed\"}": "WaitSeed",
+              "{task=\"seal/v0/addpiece\"}": "AP",
+              "{task=\"seal/v0/commit/1\"}": "C1",
+              "{task=\"seal/v0/commit/2\"}": "C2",
+              "{task=\"seal/v0/fetch\"}": "GET",
+              "{task=\"seal/v0/finalize\"}": "Finalize",
+              "{task=\"seal/v0/precommit/1\"}": "PC1",
+              "{task=\"seal/v0/precommit/2\"}": "PC2"
+            }
+          }
+        }
+      ],
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "Sectors",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "decimals": 0,
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 8,
+        "x": 16,
+        "y": 84
+      },
+      "id": 72,
+      "options": {
+        "legend": {
+          "calcs": [
+            "lastNotNull",
+            "max"
+          ],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "10.0.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "expr": "count by (state) (lotus_miner_sector_state{miner_id=\"$miner_id\", state!~\"(Available)\" })",
+          "format": "time_series",
+          "hide": false,
+          "instant": false,
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "{{state}}",
+          "refId": "D"
+        }
+      ],
+      "title": "Sealing ERRORS",
+      "transformations": [
+        {
+          "id": "seriesToColumns",
+          "options": {}
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "AddPiece": true,
+              "CommitFinalize": true,
+              "CommitWait": true,
+              "Committing": true,
+              "Empty": true,
+              "FinalizeFailed": false,
+              "FinalizeReplicaUpdate": true,
+              "FinalizeSector": true,
+              "Packing": true,
+              "PreCommit1": true,
+              "PreCommit2": true,
+              "PreCommitWait": true,
+              "PreCommitting": true,
+              "ProveReplicaUpdate": true,
+              "Proving": true,
+              "Removed": true,
+              "Removing": false,
+              "ReplicaUpdateWait": true,
+              "SealPreCommit1Failed": false,
+              "SealPreCommit2Failed": false,
+              "SnapDealsAddPiece": true,
+              "SubmitCommit": true,
+              "TerminateWait": true,
+              "UpdateActivating": true,
+              "UpdateReplica": true,
+              "WaitDeals": true,
+              "WaitSeed": true,
+              "{task=\"seal/v0/finalize\"}": true
+            },
+            "indexByName": {
+              "CommitWait": 5,
+              "Committing": 6,
+              "Empty": 7,
+              "FinalizeFailed": 3,
+              "FinalizeSector": 8,
+              "Packing": 9,
+              "PreCommit1": 10,
+              "PreCommit2": 11,
+              "PreCommitWait": 12,
+              "Proving": 13,
+              "Removed": 14,
+              "Removing": 4,
+              "SealPreCommit1Failed": 1,
+              "SealPreCommit2Failed": 2,
+              "Time": 0,
+              "WaitDeals": 15,
+              "WaitSeed": 16
+            },
+            "renameByName": {
+              "{task=\"seal/v0/addpiece\"}": "AP",
+              "{task=\"seal/v0/commit/1\"}": "C1",
+              "{task=\"seal/v0/commit/2\"}": "C2",
+              "{task=\"seal/v0/fetch\"}": "GET",
+              "{task=\"seal/v0/finalize\"}": "Finalize",
+              "{task=\"seal/v0/precommit/1\"}": "PC1",
+              "{task=\"seal/v0/precommit/2\"}": "PC2"
+            }
+          }
+        }
+      ],
+      "type": "timeseries"
+    },
+    {
+      "collapsed": false,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "mNFGdTvMk"
+      },
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 91
+      },
+      "id": 89,
+      "panels": [],
+      "repeat": "worker",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "mNFGdTvMk"
+          },
+          "refId": "A"
+        }
+      ],
+      "title": "Worker - Ressources",
+      "type": "row"
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "decimals": 0,
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 0,
+        "y": 92
+      },
+      "hiddenSeries": false,
+      "id": 100,
+      "interval": "1m",
+      "legend": {
+        "alignAsTable": true,
+        "avg": false,
+        "current": true,
+        "max": false,
+        "min": false,
+        "rightSide": true,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "10.2.3",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "repeat": "worker_host",
+      "repeatDirection": "v",
+      "seriesOverrides": [
+        {
+          "$$hashKey": "object:435",
+          "alias": "Total",
+          "color": "#F2495C",
+          "fill": 0,
+          "linewidth": 2,
+          "stack": false
+        }
+      ],
+      "spaceLength": 10,
+      "stack": true,
+      "steppedLine": false,
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "expr": "lotus_miner_worker_cpu_used{miner_id=\"$miner_id\", worker_host=\"$worker_host\"}",
+          "hide": false,
+          "instant": false,
+          "interval": "",
+          "legendFormat": "Used",
+          "refId": "D"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "expr": "lotus_miner_worker_cpu{miner_id=\"$miner_id\", worker_host=\"$worker_host\"}-lotus_miner_worker_cpu_used{miner_id=\"$miner_id\", worker_host=\"$worker_host\"}",
+          "interval": "",
+          "legendFormat": "Free",
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "expr": "lotus_miner_worker_cpu{miner_id=\"$miner_id\", worker_host=\"$worker_host\"}",
+          "hide": false,
+          "instant": false,
+          "interval": "",
+          "legendFormat": "Total",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [],
+      "timeRegions": [],
+      "title": "$worker_host - CPU",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "transformations": [],
+      "type": "graph",
+      "xaxis": {
+        "mode": "time",
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:177",
+          "decimals": 0,
+          "format": "none",
+          "label": "",
+          "logBase": 1,
+          "min": "0",
+          "show": true
+        },
+        {
+          "$$hashKey": "object:178",
+          "format": "short",
+          "logBase": 1,
+          "show": false
+        }
+      ],
+      "yaxis": {
+        "align": false
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "decimals": 0,
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 6,
+        "y": 92
+      },
+      "hiddenSeries": false,
+      "id": 116,
+      "interval": "1m",
+      "legend": {
+        "alignAsTable": true,
+        "avg": false,
+        "current": true,
+        "max": false,
+        "min": false,
+        "rightSide": true,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "10.2.3",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "repeat": "worker_host",
+      "repeatDirection": "v",
+      "seriesOverrides": [
+        {
+          "$$hashKey": "object:435",
+          "alias": "Total",
+          "color": "#F2495C",
+          "fill": 0,
+          "linewidth": 2,
+          "stack": false
+        }
+      ],
+      "spaceLength": 10,
+      "stack": true,
+      "steppedLine": false,
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "expr": "lotus_miner_worker_gpu_used{miner_id=\"$miner_id\", worker_host=\"$worker_host\"}",
+          "hide": false,
+          "instant": false,
+          "interval": "",
+          "legendFormat": "Used",
+          "refId": "D"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "expr": "lotus_miner_worker_gpu{miner_id=\"$miner_id\", worker_host=\"$worker_host\"}-lotus_miner_worker_gpu_used{miner_id=\"$miner_id\", worker_host=\"$worker_host\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "Free",
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "expr": "lotus_miner_worker_gpu{miner_id=\"$miner_id\", worker_host=\"$worker_host\"}",
+          "hide": false,
+          "instant": false,
+          "interval": "",
+          "legendFormat": "Total",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [],
+      "timeRegions": [],
+      "title": "$worker_host - GPU",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "transformations": [],
+      "type": "graph",
+      "xaxis": {
+        "mode": "time",
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:177",
+          "decimals": 0,
+          "format": "none",
+          "label": "",
+          "logBase": 1,
+          "min": "0",
+          "show": true
+        },
+        {
+          "$$hashKey": "object:178",
+          "format": "short",
+          "logBase": 1,
+          "show": false
+        }
+      ],
+      "yaxis": {
+        "align": false
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "decimals": 0,
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "unit": "bytes"
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 12,
+        "y": 92
+      },
+      "hiddenSeries": false,
+      "id": 137,
+      "interval": "1m",
+      "legend": {
+        "alignAsTable": true,
+        "avg": false,
+        "current": true,
+        "max": false,
+        "min": false,
+        "rightSide": true,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "10.2.3",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "repeat": "worker_host",
+      "repeatDirection": "v",
+      "seriesOverrides": [
+        {
+          "$$hashKey": "object:435",
+          "alias": "Total",
+          "color": "#F2495C",
+          "fill": 0,
+          "linewidth": 2,
+          "stack": false
+        }
+      ],
+      "spaceLength": 10,
+      "stack": true,
+      "steppedLine": false,
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "exemplar": true,
+          "expr": "lotus_miner_worker_ram_tasks{miner_id=\"$miner_id\", worker_host=\"$worker_host\"}",
+          "hide": false,
+          "instant": false,
+          "interval": "",
+          "legendFormat": "Used",
+          "refId": "D"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "exemplar": true,
+          "expr": "lotus_miner_worker_ram_reserved{miner_id=\"$miner_id\", worker_host=\"$worker_host\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "Reserved",
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "exemplar": true,
+          "expr": "lotus_miner_worker_ram_total{miner_id=\"$miner_id\", worker_host=\"$worker_host\"}-(lotus_miner_worker_ram_reserved{miner_id=\"$miner_id\", worker_host=\"$worker_host\"}+lotus_miner_worker_ram_tasks{miner_id=\"$miner_id\", worker_host=\"$worker_host\"})",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "Free",
+          "refId": "C"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "exemplar": true,
+          "expr": "lotus_miner_worker_ram_total{miner_id=\"$miner_id\", worker_host=\"$worker_host\"}",
+          "hide": false,
+          "instant": false,
+          "interval": "",
+          "legendFormat": "Total",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [],
+      "timeRegions": [],
+      "title": "$worker_host - Physical Memory",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "transformations": [],
+      "type": "graph",
+      "xaxis": {
+        "mode": "time",
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:177",
+          "decimals": 0,
+          "format": "bytes",
+          "label": "",
+          "logBase": 1,
+          "min": "0",
+          "show": true
+        },
+        {
+          "$$hashKey": "object:178",
+          "format": "short",
+          "logBase": 1,
+          "show": false
+        }
+      ],
+      "yaxis": {
+        "align": false
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "decimals": 0,
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "unit": "bytes"
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 18,
+        "y": 92
+      },
+      "hiddenSeries": false,
+      "id": 138,
+      "interval": "1m",
+      "legend": {
+        "alignAsTable": true,
+        "avg": false,
+        "current": true,
+        "max": false,
+        "min": false,
+        "rightSide": true,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "10.2.3",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "repeat": "worker_host",
+      "repeatDirection": "v",
+      "seriesOverrides": [
+        {
+          "$$hashKey": "object:435",
+          "alias": "Total",
+          "color": "#F2495C",
+          "fill": 0,
+          "linewidth": 2,
+          "stack": false
+        }
+      ],
+      "spaceLength": 10,
+      "stack": true,
+      "steppedLine": false,
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "exemplar": true,
+          "expr": "lotus_miner_worker_vmem_tasks{miner_id=\"$miner_id\", worker_host=\"$worker_host\"}",
+          "hide": false,
+          "instant": false,
+          "interval": "",
+          "legendFormat": "Used",
+          "refId": "D"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "exemplar": true,
+          "expr": "lotus_miner_worker_vmem_reserved{miner_id=\"$miner_id\", worker_host=\"$worker_host\"}",
+          "hide": false,
+          "instant": false,
+          "interval": "",
+          "legendFormat": "Reserved",
+          "refId": "C"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "exemplar": true,
+          "expr": "lotus_miner_worker_vmem_total{miner_id=\"$miner_id\", worker_host=\"$worker_host\"}-lotus_miner_worker_vmem_tasks{miner_id=\"$miner_id\", worker_host=\"$worker_host\"}-lotus_miner_worker_vmem_reserved{miner_id=\"$miner_id\", worker_host=\"$worker_host\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "Free",
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "exemplar": true,
+          "expr": "lotus_miner_worker_vmem_total{miner_id=\"$miner_id\", worker_host=\"$worker_host\"}",
+          "hide": false,
+          "instant": false,
+          "interval": "",
+          "legendFormat": "Total",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [],
+      "timeRegions": [],
+      "title": "$worker_host - VMEM (RAM + Swap)",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "transformations": [],
+      "type": "graph",
+      "xaxis": {
+        "mode": "time",
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:177",
+          "decimals": 0,
+          "format": "bytes",
+          "label": "",
+          "logBase": 1,
+          "min": "0",
+          "show": true
+        },
+        {
+          "$$hashKey": "object:178",
+          "format": "short",
+          "logBase": 1,
+          "show": false
+        }
+      ],
+      "yaxis": {
+        "align": false
+      }
+    }
+  ],
+  "refresh": "10s",
+  "schemaVersion": 39,
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "current": {},
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_PROMETHEUS}"
+        },
+        "definition": "query_result(sort(green_rack_power_consumption_va))",
+        "hide": 2,
+        "includeAll": true,
+        "label": "Location",
+        "multi": false,
+        "name": "location_name",
+        "options": [],
+        "query": {
+          "qryType": 3,
+          "query": "query_result(sort(green_rack_power_consumption_va))",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 1,
+        "regex": "/.*location_name=\"([^\"]*).*/",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "current": {},
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_PROMETHEUS}"
+        },
+        "definition": "label_values(lotus_miner_info,miner_id)",
+        "hide": 0,
+        "includeAll": false,
+        "label": "Miner ID",
+        "multi": false,
+        "name": "miner_id",
+        "options": [],
+        "query": {
+          "qryType": 1,
+          "query": "label_values(lotus_miner_info,miner_id)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "tagValuesQuery": "",
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "current": {},
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_PROMETHEUS}"
+        },
+        "definition": "query_result(sort(lotus_miner_worker_cpu{miner_id=\"$miner_id\"}))",
+        "hide": 2,
+        "includeAll": true,
+        "label": "Worker",
+        "multi": false,
+        "name": "worker_host",
+        "options": [],
+        "query": {
+          "qryType": 3,
+          "query": "query_result(sort(lotus_miner_worker_cpu{miner_id=\"$miner_id\"}))",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 1,
+        "regex": "/.*worker_host=\"([^\"]*).*/",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "current": {},
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_PROMETHEUS}"
+        },
+        "definition": "query_result(sort(green_rack_power_consumption_va{}))",
+        "hide": 0,
+        "includeAll": false,
+        "label": "Client Name",
+        "multi": false,
+        "name": "client_name",
+        "options": [],
+        "query": {
+          "qryType": 3,
+          "query": "query_result(sort(green_rack_power_consumption_va{}))",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 1,
+        "regex": "/.*client_name=\"([^\"]*).*/",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "current": {},
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_PROMETHEUS}"
+        },
+        "definition": "query_result(sort(green_rack_power_consumption_va{client_name=\"$client_name\"}))",
+        "hide": 2,
+        "includeAll": true,
+        "label": "Rack Id",
+        "multi": false,
+        "name": "rack_id",
+        "options": [],
+        "query": {
+          "qryType": 3,
+          "query": "query_result(sort(green_rack_power_consumption_va{client_name=\"$client_name\"}))",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 1,
+        "regex": "/.*rack_id=\"([^\"]*).*/",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-24h",
+    "to": "now"
+  },
+  "timepicker": {
+    "refresh_intervals": [
+      "10s",
+      "30s",
+      "1m",
+      "5m",
+      "15m",
+      "30m",
+      "1h",
+      "2h",
+      "1d"
+    ]
+  },
+  "timezone": "",
+  "title": "Green",
+  "uid": "v3C33aX4k",
+  "version": 61,
+  "weekStart": ""
+}
