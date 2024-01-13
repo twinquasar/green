@@ -22,7 +22,7 @@ https://api.green.twinquasar.io  (contact us to get access)
 
 The grafana dashboard can be downloaded form this repo [/grafana](/green/tree/master/grafana) 
 
-<img src="https://github.com/twinquasar/green/raw/main/images/dashboard.png">
+<img src="https://github.com/twinquasar/green/raw/main/images/dashboard.jpg">
 
 ## Security considerations
 - Minimize the exposure of data to the essential amount.
