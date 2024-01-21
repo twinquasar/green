@@ -201,7 +201,7 @@ static void print_std_reg(int fd, uint8_t reg, const char *fmt, ...)
 	for (; len < 16; len++)
 		fputs(" ", stdout);
 
-	printf("%5.1f\n", mkv(val));
+	printf("{equipment=\"" HOST "\"} %5.1f\n", mkv(val));
 }
 #endif
 
@@ -264,7 +264,7 @@ void dump_names(int fd)
 #if PROMETHEUS
 	printf("# HELP " PROMETHEUS_PREFIX "hardware_info Hardware info\n");
 	printf("# TYPE " PROMETHEUS_PREFIX "hardware_info gauge\n");
-	printf(PROMETHEUS_PREFIX "hardware_info{name=\"%s\",vendor=\"%s\",product=\"%s\"} 1\n", name, vendor, product);
+	printf(PROMETHEUS_PREFIX "hardware_info{equipment=\"" HOST "\" name=\"%s\",vendor=\"%s\",product=\"%s\"} 1\n", name, vendor, product);
 #else
 	printf("name:           '%s'\n", name);
 	printf("vendor:         '%s'\n", vendor);
@@ -282,10 +282,10 @@ void dump_times(int fd)
 #if PROMETHEUS
 	printf("# HELP " PROMETHEUS_PREFIX "powered_seconds Global time powered in seconds\n");
 	printf("# TYPE " PROMETHEUS_PREFIX "powered_seconds gauge\n");
-	printf(PROMETHEUS_PREFIX "powered_seconds %u\n", powered);
+	printf(PROMETHEUS_PREFIX "powered_seconds {equipment=\"" HOST "\"} %u\n", powered);
 	printf("# HELP " PROMETHEUS_PREFIX "uptime_seconds Current uptime in seconds\n");
 	printf("# TYPE " PROMETHEUS_PREFIX "uptime_seconds gauge\n");
-	printf(PROMETHEUS_PREFIX "uptime_seconds %u\n", uptime);
+	printf(PROMETHEUS_PREFIX "uptime_seconds {equipment=\"" HOST "\"} %u\n", uptime);
 #else
 	printf("powered:        %u (%dd. %dh)\n",
 		v32, v32 / (24*60*60), v32 / (60*60) % 24);
@@ -299,8 +299,8 @@ void dump_temps(int fd)
 #if PROMETHEUS
 	printf("# HELP " PROMETHEUS_PREFIX "temperature_celsius Temperature in seconds\n");
 	printf("# TYPE " PROMETHEUS_PREFIX "temperature_celsius gauge\n");
-	print_prometheus_reg(fd, 0x8d, "temperature_celsius{sensor=\"1\"}");
-	print_prometheus_reg(fd, 0x8e, "temperature_celsius{sensor=\"2\"}");
+	print_prometheus_reg(fd, 0x8d, "temperature_celsius{equipment=\"" HOST "\" sensor=\"1\"}");
+	print_prometheus_reg(fd, 0x8e, "temperature_celsius{equipment=\"" HOST "\" sensor=\"2\"}");
 #else
 	print_std_reg(fd, 0x8d, "temp1");
 	print_std_reg(fd, 0x8e, "temp2");
@@ -312,7 +312,7 @@ void dump_fan(int fd)
 #if PROMETHEUS
 	printf("# HELP " PROMETHEUS_PREFIX "fan_rpm Fan speed\n");
 	printf("# TYPE " PROMETHEUS_PREFIX "fan_rpm gauge\n");
-	print_prometheus_reg(fd, 0x8d, "fan_rpm");
+	print_prometheus_reg(fd, 0x8d, "fan_rpm{equipment=\"" HOST "\"}");
 #else
 	print_std_reg(fd, 0x90, "fan rpm");
 #endif
@@ -329,13 +329,13 @@ void dump_global_power(int fd)
 
 	printf("# HELP " PROMETHEUS_PREFIX "global_supply_volts Global power supply volts\n");
 	printf("# TYPE " PROMETHEUS_PREFIX "global_supply_volts gauge\n");
-	printf(PROMETHEUS_PREFIX "global_supply_volts %.1f\n", mkv(volts));
+	printf(PROMETHEUS_PREFIX "global_supply_volts{equipment=\"" HOST "\"} %.1f\n", mkv(volts));
 	printf("# HELP " PROMETHEUS_PREFIX "global_power_watts Global power used in watts\n");
 	printf("# TYPE " PROMETHEUS_PREFIX "global_power_watts gauge\n");
-	printf(PROMETHEUS_PREFIX "global_power_watts %.1f\n", mkv(watts));
+	printf(PROMETHEUS_PREFIX "global_power_watts{equipment=\"" HOST "\"} %.1f\n", mkv(watts));
 	printf("# HELP " PROMETHEUS_PREFIX GREEN_LIGHT " Global power used in watts\n");
 	printf("# TYPE " PROMETHEUS_PREFIX GREEN_LIGHT " gauge\n");
-	printf(PROMETHEUS_PREFIX GREEN_LIGHT " %.1f\n", mkv(watts));
+	printf(PROMETHEUS_PREFIX GREEN_LIGHT "{equipment=\"" HOST "\"} %.1f\n", mkv(watts));
 #else
 	print_std_reg(fd, 0x88, "supply volts");
 	print_std_reg(fd, 0xee, "total watts");
@@ -364,15 +364,15 @@ void dump_powers(int fd)
 	printf("# HELP " PROMETHEUS_PREFIX "output_volts single output in volts\n");
 	printf("# TYPE " PROMETHEUS_PREFIX "output_volts gauge\n");
 	for (osel = 0; osel < 3; osel++)
-            printf(PROMETHEUS_PREFIX "output_volts{ouput=\"%u\"} %.1f\n", osel, volts[osel]);
+            printf(PROMETHEUS_PREFIX "output_volts{equipment=\"" HOST "\" ouput=\"%u\"} %.1f\n", osel, volts[osel]);
 	printf("# HELP " PROMETHEUS_PREFIX "output_amperes single output in amperes\n");
 	printf("# TYPE " PROMETHEUS_PREFIX "output_amperes gauge\n");
 	for (osel = 0; osel < 3; osel++)
-            printf(PROMETHEUS_PREFIX "output_amperes{ouput=\"%u\"} %.1f\n", osel, amps[osel]);
+            printf(PROMETHEUS_PREFIX "output_amperes{equipment=\"" HOST "\" ouput=\"%u\"} %.1f\n", osel, amps[osel]);
 	printf("# HELP " PROMETHEUS_PREFIX "output_watts single output power in watts\n");
 	printf("# TYPE " PROMETHEUS_PREFIX "output_watts gauge\n");
 	for (osel = 0; osel < 3; osel++)
-            printf(PROMETHEUS_PREFIX "output_watts{ouput=\"%u\"} %.1f\n", osel, watts[osel]);
+            printf(PROMETHEUS_PREFIX "output_watts{equipment=\"" HOST "\" ouput=\"%u\"} %.1f\n", osel, watts[osel]);
 #else
 	uint8_t osel;
 

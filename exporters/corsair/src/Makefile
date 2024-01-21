@@ -1,4 +1,5 @@
-CFLAGS += -Wall -ggdb -O2
+host := $(shell hostname)
+CFLAGS += -Wall -ggdb -O2 -DHOST=\"$(host)\"
 LDLIBS += -lm
 
 TARGET = corsairmi
